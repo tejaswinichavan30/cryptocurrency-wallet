@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receive Coins</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .receive-box{
+            max-width:700px;
+            margin:50px auto;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0 10px 25px rgba(0,0,0,.15);
+        }
+
+        .wallet{
+            width:100%;
+            padding:15px;
+            font-size:18px;
+            border-radius:10px;
+            margin-top:20px;
+            margin-bottom:20px;
+            text-align:center;
+        }
+
+        img{
+            width:220px;
+            margin:20px;
+        }
+
+        button{
+            background:#6d4aff;
+            color:white;
+            border:none;
+            padding:14px 30px;
+            border-radius:10px;
+            cursor:pointer;
+            font-size:18px;
+        }
+
+        button:hover{
+            background:#5638dd;
+        }
+
+    </style>
+
+</head>
+
+<body class="app-body">
+
+<div class="receive-box">
+
+    <h1>Receive Coins</h1>
+
+    <h3>{{ user.username }}</h3>
+
+    <img src="data:image/png;base64,{{ qr_code }}">
+
+    <input
+        id="wallet"
+        class="wallet"
+        value="{{ user.wallet_address }}"
+        readonly>
+
+    <button onclick="copyAddress()">
+        Copy Wallet Address
+    </button>
+
+    <br><br>
+
+    <a href="{{ url_for('dashboard') }}">
+        ← Back to Dashboard
+    </a>
+
+</div>
+
+<script>
+
+function copyAddress(){
+
+    let copy=document.getElementById("wallet");
+
+    copy.select();
+
+    navigator.clipboard.writeText(copy.value);
+
+    alert("Wallet Address Copied!");
+
+}
+
+</script>
+
+</body>
+</html>

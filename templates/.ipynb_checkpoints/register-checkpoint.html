@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Crypto Wallet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="simple-page">
+    <div class="auth-shell">
+        <div class="auth-left">
+            <div class="auth-brand">
+                <div class="auth-brand-icon">₿</div>
+                <div>CryptoVault</div>
+            </div>
+
+            <div class="auth-hero">
+                <h1>Create a New Wallet Account</h1>
+                <p>
+                    Register to generate your wallet, start tracking balances,
+                    and use the blockchain-powered crypto wallet system.
+                </p>
+
+                <div class="auth-points">
+                    <div class="auth-point">🪙 Unique wallet address for every user</div>
+                    <div class="auth-point">💼 Default balance assigned on registration</div>
+                    <div class="auth-point">⚙ Ready for transactions, mining, and validation</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <div class="auth-badge">📝 Register Wallet</div>
+            <h2 class="auth-title">Create Your Account</h2>
+            <p class="auth-subtitle">
+                Fill in your details to create your blockchain wallet account.
+            </p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% for category, message in messages %}
+                <div class="alert {{ category }}">{{ message }}</div>
+              {% endfor %}
+            {% endwith %}
+
+            <form method="POST" class="auth-form">
+                <div class="auth-field">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="auth-field">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Create a secure password" required>
+                </div>
+
+                <div class="auth-action">
+                    <button type="submit" class="auth-btn">Register Now</button>
+                </div>
+            </form>
+
+            <p class="auth-footer">
+                Already have an account? <a href="{{ url_for('login') }}">Login</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

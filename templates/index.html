@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoVault</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="home-dark">
+
+<div class="home-container">
+
+    <header class="home-navbar">
+        <div class="logo">
+            <span class="logo-icon">₿</span>
+            CryptoVault
+        </div>
+
+        <div class="nav-actions">
+            <a href="{{ url_for('login') }}" class="nav-btn">Login</a>
+            <a href="{{ url_for('register') }}" class="nav-btn primary">Create Account</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-left">
+            <span class="badge">⚡ Blockchain Wallet</span>
+
+            <h1>
+                Secure Crypto Wallet<br>
+                with Blockchain Power
+            </h1>
+
+            <p>
+                Send coins, mine blocks, validate transactions, and manage your wallet
+                with a premium dashboard experience — built for both mobile and desktop.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{{ url_for('register') }}" class="btn primary">Get Started</a>
+                <a href="{{ url_for('login') }}" class="btn secondary">Login</a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="wallet-preview">
+                <div class="preview-header">
+                    <span>Platform Features</span>
+                    <span class="green">Secure</span>
+                </div>
+
+                <h2>Blockchain Wallet</h2>
+
+                <div class="preview-actions">
+                    <span>Send</span>
+                    <span>Receive</span>
+                    <span>Mine</span>
+                    <span>Validate</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>

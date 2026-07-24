@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Crypto Wallet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-body">
+    <div class="app-layout">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">₿</div>
+                <div class="brand-text">CryptoVault</div>
+            </div>
+
+            <nav class="side-menu">
+                <a href="{{ url_for('dashboard') }}" class="menu-item active">🏠 Dashboard</a>
+                <a href="{{ url_for('send') }}" class="menu-item">💸 Send Coins</a>
+                <a href="{{ url_for('mine') }}" class="menu-item">⛏ Mine Block</a>
+                <a href="{{ url_for('validate') }}" class="menu-item">🔗 Validate Chain</a>
+                <a href="{{ url_for('logout') }}" class="menu-item logout-link">🚪 Logout</a>
+            </nav>
+
+            <div class="sidebar-card">
+                <h4>Wallet Security</h4>
+                <p>Track transactions and validate your blockchain securely.</p>
+                <a href="{{ url_for('send') }}" class="mini-btn">Transfer Now</a>
+            </div>
+        </aside>
+
+        <main class="main-area">
+            <header class="top-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Welcome back, {{ user.username }}. Here’s your wallet overview.</p>
+                </div>
+
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search assets...">
+                    </div>
+                </div>
+            </header>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% for category, message in messages %}
+                <div class="alert {{ category }}">{{ message }}</div>
+              {% endfor %}
+            {% endwith %}
+
+            <section class="hero-grid">
+                <div class="balance-hero">
+                    <div class="hero-top">
+                        <div>
+                            <span class="small-label">Total Balance</span>
+                            <h2>{{ user.balance }} Coins</h2>
+                        </div>
+                        <span class="growth-text">+2.4%</span>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a href="{{ url_for('send') }}" class="hero-btn primary-btn">↗ Send</a>
+                        <a href="{{ url_for('send') }}" class="hero-btn secondary-btn">↙ Receive</a>
+                        <a href="{{ url_for('mine') }}" class="hero-btn secondary-btn">＋ Mine</a>
+                        <a href="{{ url_for('validate') }}" class="hero-btn secondary-btn">⇄ Validate</a>
+                    </div>
+                </div>
+
+                <div class="performance-card">
+                    <div class="card-top">
+                        <h3>Wallet Info</h3>
+                        <span class="badge-soft">Live</span>
+                    </div>
+
+                    <div class="mini-chart">
+                        <div class="chart-line">
+                            <span></span><span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <div class="wallet-meta">
+                        <div>
+                            <small>Wallet Address</small>
+                            <p>{{ user.wallet_address }}</p>
+                        </div>
+                        <div>
+                            <small>Status</small>
+                            <p>Active</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-card">
+                <div class="section-head">
+                    <h3>Your Transactions</h3>
+                    <span>Recent records</span>
+                </div>
+
+                <div class="table-wrap">
+                    {% if transactions %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sender</th>
+                                <th>Receiver</th>
+                                <th>Amount</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for txn in transactions %}
+                            <tr>
+                                <td>{{ txn.sender }}</td>
+                                <td>{{ txn.receiver }}</td>
+                                <td>{{ txn.amount }}</td>
+                                <td>{{ txn.timestamp }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="empty-state">No transactions yet.</div>
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="bottom-grid">
+                <div class="content-card">
+                    <div class="section-head">
+                        <h3>Recent Activity</h3>
+                        <span>Live wallet updates</span>
+                    </div>
+
+                    <div class="activity-list">
+                        {% if transactions %}
+                            {% for txn in transactions[:4] %}
+                            <div class="activity-item">
+                                <div class="activity-icon">⇄</div>
+                                <div class="activity-text">
+                                    <strong>Transaction Processed</strong>
+                                    <p>{{ txn.timestamp }}</p>
+                                </div>
+                                <div class="activity-amount">₹ {{ txn.amount }}</div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="empty-state">No recent activity available.</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="section-head">
+                        <h3>Blockchain Explorer</h3>
+                        <span>{{ chain|length }} blocks</span>
+                    </div>
+
+                    <div class="block-scroll">
+                        {% for block in chain %}
+                        <div class="block-card">
+                            <div class="block-card-top">
+                                <strong>Block {{ block.index }}</strong>
+                                <span>Verified</span>
+                            </div>
+                            <p><b>Proof:</b> {{ block.proof }}</p>
+                            <p><b>Previous Hash:</b> {{ block.previous_hash }}</p>
+                            <p><b>Transactions:</b> {{ block.transactions }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
