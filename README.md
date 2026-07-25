@@ -6,7 +6,9 @@ A secure web-based cryptocurrency wallet application that allows users to create
 
 ## 🚀 Live Demo
 
-🔗 **Application:** https://crypto-currency-wallet.vercel.app/
+🔗 **Application:** ## Live Demo
+
+https://cryptocurrency-wallet-zrzq.onrender.com
 
 ---
 
