@@ -6,9 +6,7 @@ A secure web-based cryptocurrency wallet application that allows users to create
 
 ## 🚀 Live Demo
 
-🔗 **Application:** ## Live Demo
-
-https://cryptocurrency-wallet-zrzq.onrender.com
+🔗 **Application:** [Cryptocurrency Wallet](https://cryptocurrency-wallet-zrzq.onrender.com)
 
 ---
 
