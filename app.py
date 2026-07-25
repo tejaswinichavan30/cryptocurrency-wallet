@@ -322,6 +322,7 @@ def send():
         return redirect(url_for("dashboard"))
 
     return render_template("send.html")
+
 @app.route("/receive")
 def receive():
     if "username" not in session:
